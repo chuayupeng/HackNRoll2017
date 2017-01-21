@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "steps.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block subtitle %}Step 2{% endblock %}
@@ -8,56 +8,17 @@
     <div class="row text-center"><h1>G.o.D</h1></div>
     <!--Form-->
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="well">
+                <p class='lead text-center'>CPF Account Balances</p>
                 {{ wtf.quick_form(form, form_type="horizontal") }}  
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="well">  
                 <div id="chart"></div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-    {{super()}}
-    <script>
-    var s;
-    $.getJSON( "/chart_data", function( data ) {
-        $("#chart").dxChart({
-            dataSource: data,
-            commonSeriesSettings: {
-                type: "stackedArea",
-                argumentField: "Age"
-            },
-            series: [
-                { valueField: "Cumulative Sum", name: "Salary" },
-                { valueField: "Cumulative CPF", name: "CPF" }
-            ],
-            title: "Projected Earnings over Time",
-            argumentAxis:{
-                valueMarginsEnabled: false,
-                grid:{
-                    visible: true
-                }
-            },
-            valueAxis:{
-                grid:{
-                    visible: false
-                }
-            },
-            legend: {
-                verticalAlignment: "bottom",
-                horizontalAlignment: "center"
-            },
-            tooltip:{
-                enabled: true
-            }
-
-        });
-    });
-    </script>
 {% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block scripts %}
+    {{super()}}
+    <script>
+    $.getJSON( "/chart_data", function( data ) {
+        Highcharts.chart('chart', {
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Area chart with negative values'
+            },
+            xAxis: {
+                categories: data['Age']
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                area: {
+                    stacking: 'normal',
+                    lineColor: '#666666',
+                    lineWidth: 1,
+                    marker: {
+                        lineWidth: 1,
+                        lineColor: '#666666'
+                    }
+                }
+            },
+            series: [{
+                name: 'Cumulative Sum',
+                data: data['Cumulative Sum']
+            }, {
+                name: 'Cumulative CPF',
+                data: data['Cumulative CPF'] 
+            }]
+        });
+    });
+    </script>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "steps.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block subtitle %}Final{% endblock %}
@@ -17,42 +17,3 @@
 </div>
 {% endblock %}
 
-{% block scripts %}
-    {{super()}}
-    <script>
-    var s;
-    $.getJSON( "/chart_data", function( data ) {
-        $("#chart").dxChart({
-            dataSource: data,
-            commonSeriesSettings: {
-                type: "stackedArea",
-                argumentField: "Age"
-            },
-            series: [
-                { valueField: "Cumulative Sum", name: "Salary" },
-                { valueField: "Cumulative CPF", name: "CPF" }
-            ],
-            title: "Projected Earnings over Time",
-            argumentAxis:{
-                valueMarginsEnabled: false,
-                grid:{
-                    visible: true
-                }
-            },
-            valueAxis:{
-                grid:{
-                    visible: false
-                }
-            },
-            legend: {
-                verticalAlignment: "bottom",
-                horizontalAlignment: "center"
-            },
-            tooltip:{
-                enabled: true
-            }
-
-        });
-    });
-    </script>
-{% endblock %}

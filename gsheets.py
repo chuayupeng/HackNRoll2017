@@ -1,38 +1,7 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-# MAGIC VALUES
 CHART_DATA_TITLE = "Charts"
-
-# Basics
-AGE_CELL = "B2"
-SALARY_CELL = "B3"
-SAVINGS_CELL = "B4"
-PERCENT_SAVED_PER_MONTH = "B13"
-
-# Advanced
-PERCENT_INCREASE_SALARY = "B11"
-PERCENT_SAVINGS_INTEREST = "B15"
-PERCENT_REDUCED_EXP = "B16"
-INFLATION_RATE = "B18"
-DESIRED_RETIREMENT_AGE = "B19"
-
-# CPF
-O_ACC = "B6"
-S_ACC = "B7"
-M_ACC = "B8"
-R_ACC = "B9"
-
-# Major Loans
-
-LOANS_M_REPAY = "D2"
-LOANS_M_LEFT = "D3"
-
-H_PRICE = "D6"
-H_BUY_AGE = "D7"
-H_PERCENT_LOAN = "D8"
-H_LOAN_YEARS = "D9"
-H_INTEREST_RATE = "D10"
 
 class googleSheet():
 	def __init__(self, key):

@@ -55,14 +55,32 @@ def step1():
         gs.update_cell(SAVINGS_CELL, form.savings.data)
         gs.update_cell(PERCENT_SAVED_PER_MONTH, form.perc_saved.data)
 
+        # TODO: Advanced Options
         return redirect(url_for('step2'))
+
+    gs = googleSheet(GSHEET_KEY)
+    gs.update_cell(O_ACC, 0)
+    gs.update_cell(S_ACC, 0)
+    gs.update_cell(M_ACC, 0)
+    gs.update_cell(R_ACC, 0)
+    gs.update_cell(AGE_CELL, 20)
+    gs.update_cell(SALARY_CELL, 0)
+    gs.update_cell(SAVINGS_CELL, 0)
+    gs.update_cell(PERCENT_SAVED_PER_MONTH, 0)
+    gs.update_cell(LOANS_M_REPAY, 0)
+    gs.update_cell(H_PRICE, 0)
     return render_template('step1.html', form = form)
 
 @app.route('/step2', methods=['GET', 'POST'])
 def step2():
     form = StepTwoForm()
     if form.validate_on_submit():
-        # TODO: update values in gspread
+        gs = googleSheet(GSHEET_KEY)
+        gs.update_cell(O_ACC, form.cpf_oa.data)
+        gs.update_cell(S_ACC, form.cpf_sa.data)
+        gs.update_cell(M_ACC, form.cpf_ma.data)
+        gs.update_cell(R_ACC, form.cpf_ra.data)
+
         return redirect(url_for('step3'))
     return render_template('step2.html', form=form)
 
@@ -70,9 +88,18 @@ def step2():
 def step3():
     form = StepThreeForm()
     if form.validate_on_submit():
-        curr_age = googleSheet(GSHEET_KEY).getWorksheet(0).acell(AGE_CELL)
+        gs = googleSheet(GSHEET_KEY)
+        curr_age = int(gs.inputArea.acell(AGE_CELL).value)
         if form.house_buy_age.data < curr_age:
             return render_template('step3.html', form=form)
+
+        gs.update_cell(LOANS_M_REPAY, form.loan_monthly_repayment.data)
+        gs.update_cell(LOANS_M_LEFT, form.loan_months_left.data)
+        gs.update_cell(H_PRICE, form.house_price.data)
+        gs.update_cell(H_BUY_AGE, form.house_buy_age.data)
+        gs.update_cell(H_PERCENT_LOAN, form.house_perc_loan.data)
+        gs.update_cell(H_LOAN_YEARS, form.house_loan_years.data)
+        gs.update_cell(H_INTEREST_RATE, form.house_int_rate.data)
         return redirect(url_for('final'))
     return render_template('step3.html', form=form)
 
@@ -83,17 +110,17 @@ def final():
 @app.route('/chart_data', methods=['GET', 'POST'])
 def get_chart_data():
     data = googleSheet(GSHEET_KEY).get_chart_data()
-    title = data[0]
-
-    output = []
+    titles = data[0]
+    d = {}
+    
     for row in data[1:]:
         if '' not in row:
-            d = {}
-            for i in range(len(title)):
-                d[title[i]] = int(float(row[i].replace("$", "").replace(",", "")))
-            output.append(d)
+            for i in range(len(titles)):
+                if not d.get(titles[i]):
+                    d[titles[i]] = []
+                d[titles[i]].append(int(float(row[i].replace("$", "").replace(",", ""))))
 
-    return json.dumps(output)
+    return json.dumps(d)
 
 
 if __name__ == "__main__":
