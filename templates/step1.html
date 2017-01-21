@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block subtitle %}Step 1{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <h1>Fill in your details to start the process.</h1>
+    <!--Form-->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well">
+                {{ wtf.quick_form(form, form_type="horizontal") }}  
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well">  
+                <div id="chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}
+    <script>
+    Morris.Area({
+      element: 'chart',
+      data: [
+        { y: '2006', a: 100, b: 90 },
+        { y: '2007', a: 75,  b: 65 },
+        { y: '2008', a: 50,  b: 40 },
+        { y: '2009', a: 75,  b: 65 },
+        { y: '2010', a: 50,  b: 40 },
+        { y: '2011', a: 75,  b: 65 },
+        { y: '2012', a: 100, b: 90 }
+      ],
+      xkey: 'y',
+      ykeys: ['a', 'b'],
+      labels: ['Series A', 'Series B']
+    });
+    </script>
+{% endblock %}
