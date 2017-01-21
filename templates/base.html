@@ -26,8 +26,15 @@
 
 {% block scripts %}
 {{ super() }}
+<!-- DevExtreme dependencies -->
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
+<!-- DevExtreme themes -->
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/16.2.4/css/dx.common.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/16.2.4/css/dx.light.css" />
+<!-- A DevExtreme library -->
+<script type="text/javascript" src="https://cdn3.devexpress.com/jslib/16.2.4/js/dx.all.js"></script>
+
 <script src="https://use.fontawesome.com/ad691dc47b.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 {% endblock %}

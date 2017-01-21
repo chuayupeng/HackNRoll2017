@@ -42,18 +42,15 @@ class googleSheet():
 		self.sheet = self.gc.open_by_key(key)
 		self.inputArea = self.sheet.get_worksheet(0)
 
-	def update_value(self, cell, value):
+	def update_cell(self, cell, value):
 		"""
 		Params
 		------
 		cell : String {'B2', 'B3', ..}
 		value : Integer { 1, 500, 2000, .. }
 		"""
-
-                self.inputArea.update_acell(cell, value)
+		self.inputArea.update_acell(cell, value)
 		
-
-
 	def get_chart_data(self):
 		"""
 		Returns
