@@ -23,8 +23,13 @@ class googleSheet():
 		self.gc = gspread.authorize(credentials)
 		self.sheet = self.gc.open_by_key(key)
 
-	def update_value(self, cell):
-		pass
+	def update_value(self, cell, value):
+		"""
+		Params
+		------
+		cell : String {'age', 'salary', '..'}
+		"""
+
 
 	def get_chart_data(self):
 		"""
