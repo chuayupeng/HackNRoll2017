@@ -2,6 +2,14 @@
 
 {% block title %}G.O.D | {% block subtitle %}{% endblock %}{% endblock %}
 
+{% block header %}
+<div class="row text-center">
+    <h1>G.o.D</h1>
+    <h2>take a glimpse into your financial future</h2>
+</div>
+<hr>
+{% endblock %}
+
 {% block styles %}
 {{ super() }}
 <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">

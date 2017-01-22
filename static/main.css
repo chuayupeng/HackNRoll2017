@@ -1,0 +1,12 @@
+/* Body */
+h1 {
+    font-size: 1.5em;
+    font-weight: 700px;
+}
+h1, h2 {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+p {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+}
