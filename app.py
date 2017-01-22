@@ -15,34 +15,34 @@ bootstrap.init_app(app)
 CHART_DATA_TITLE = "Charts"
 
 # Basics
-AGE_CELL = "B2"
-SALARY_CELL = "B3"
-SAVINGS_CELL = "B4"
-PERCENT_SAVED_PER_MONTH = "B13"
+AGE_CELL = "I2"
+SALARY_CELL = "I3"
+SAVINGS_CELL = "I4"
+PERCENT_SAVED_PER_MONTH = "I9"
 
 # Advanced
-PERCENT_INCREASE_SALARY = "B11"
-PERCENT_SAVINGS_INTEREST = "B15"
-PERCENT_REDUCED_EXP = "B16"
-INFLATION_RATE = "B18"
-DESIRED_RETIREMENT_AGE = "B19"
+PERCENT_INCREASE_SALARY = "I17"
+PERCENT_SAVINGS_INTEREST = "I18"
+PERCENT_REDUCED_EXP = "I19"
+INFLATION_RATE = "I20"
+DESIRED_RETIREMENT_AGE = "I21"
 
 # CPF
-O_ACC = "B6"
-S_ACC = "B7"
-M_ACC = "B8"
-R_ACC = "B9"
+O_ACC = "I5"
+S_ACC = "I6"
+M_ACC = "I7"
+R_ACC = "I8"
 
 # Major Loans
 
-LOANS_M_REPAY = "D2"
-LOANS_M_LEFT = "D3"
+LOANS_M_REPAY = "I10"
+LOANS_M_LEFT = "I11"
 
-H_PRICE = "D6"
-H_BUY_AGE = "D7"
-H_PERCENT_LOAN = "D8"
-H_LOAN_YEARS = "D9"
-H_INTEREST_RATE = "D10"
+H_PRICE = "I12"
+H_BUY_AGE = "I13"
+H_PERCENT_LOAN = "I14"
+H_LOAN_YEARS = "I15"
+H_INTEREST_RATE = "I16"
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -59,16 +59,11 @@ def step1():
         return redirect(url_for('step2'))
 
     gs = googleSheet(GSHEET_KEY)
-    gs.update_cell(O_ACC, 0)
-    gs.update_cell(S_ACC, 0)
-    gs.update_cell(M_ACC, 0)
-    gs.update_cell(R_ACC, 0)
-    gs.update_cell(AGE_CELL, 20)
-    gs.update_cell(SALARY_CELL, 0)
-    gs.update_cell(SAVINGS_CELL, 0)
-    gs.update_cell(PERCENT_SAVED_PER_MONTH, 0)
-    gs.update_cell(LOANS_M_REPAY, 0)
-    gs.update_cell(H_PRICE, 0)
+    worksheet = gs.inputArea
+    cell_list = worksheet.range('I3:I12')
+    for cell in cell_list:
+        cell.value = 0
+    worksheet.update_cells(cell_list)
     return render_template('step1.html', form = form)
 
 @app.route('/step2', methods=['GET', 'POST'])

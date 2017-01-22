@@ -28,4 +28,3 @@ class googleSheet():
 		"""
 		worksheet = self.sheet.worksheet(CHART_DATA_TITLE)
 		return worksheet.get_all_values()
-		
