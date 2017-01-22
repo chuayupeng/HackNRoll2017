@@ -2,14 +2,12 @@
 h1 {
     font-size: 4em;
     font-weight: 700;
-}
-
-h1, h2 {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h2 {
     margin-top: 10px!important;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 p {
